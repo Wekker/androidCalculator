@@ -7,6 +7,7 @@
     <string name="button_multiply">*</string>
     <string name="button_plus">+</string>
     <string name="button_minus">-</string>
+    <string name="button_equal">=</string>
     <string name="button_comma">,</string>
     <string name="button_nine">9</string>
     <string name="button_eight">8</string>
