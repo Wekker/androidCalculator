@@ -5,8 +5,8 @@
     <string name="button_percentage">%</string>
     <string name="button_divide">/</string>
     <string name="button_multiply">*</string>
-    <string name="button_sum">+</string>
-    <string name="button_subtract">-</string>
+    <string name="button_plus">+</string>
+    <string name="button_minus">-</string>
     <string name="button_comma">,</string>
     <string name="button_nine">9</string>
     <string name="button_eight">8</string>
