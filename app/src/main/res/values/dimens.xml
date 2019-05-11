@@ -7,4 +7,5 @@
     <dimen name="regular_button_weight">1</dimen>
     <dimen name="regular_button_half_weight">0.5</dimen>
     <dimen name="regular_button_three_quarter_weight">0.75</dimen>
+    <dimen name="border_width">1px</dimen>
 </resources>

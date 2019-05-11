@@ -47,7 +47,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
-                    android:text="@string/button_c"
+                    android:background="@color/colorAdvancedArithmeticButton"
+                    android:text="@string/button_clear"
+                    android:textColor="@color/colorAdvancedArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -56,7 +58,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorAdvancedArithmeticButton"
                     android:text="@string/button_arithmetic_sign"
+                    android:textColor="@color/colorAdvancedArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -65,7 +69,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorAdvancedArithmeticButton"
                     android:text="@string/button_percentage"
+                    android:textColor="@color/colorAdvancedArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -74,7 +80,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorBasicArithmeticButton"
                     android:text="@string/button_divide"
+                    android:textColor="@color/colorBasicArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
             </LinearLayout>
 
@@ -90,7 +98,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_seven"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -99,7 +109,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_eight"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -108,7 +120,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_nine"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -117,7 +131,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorBasicArithmeticButton"
                     android:text="@string/button_multiply"
+                    android:textColor="@color/colorBasicArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
             </LinearLayout>
 
@@ -133,7 +149,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_four"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -142,7 +160,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_five"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -151,7 +171,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_six"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -160,7 +182,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
-                    android:text="@string/button_minus"
+                    android:background="@color/colorBasicArithmeticButton"
+                    android:text="@string/button_subtract"
+                    android:textColor="@color/colorBasicArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
             </LinearLayout>
 
@@ -176,7 +200,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_one"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -185,7 +211,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_two"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -194,7 +222,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_three"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -203,7 +233,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
-                    android:text="@string/button_plus"
+                    android:background="@color/colorBasicArithmeticButton"
+                    android:text="@string/button_add"
+                    android:textColor="@color/colorBasicArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
             </LinearLayout>
 
@@ -219,7 +251,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_zero"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -228,7 +262,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_half_weight"
+                    android:background="@color/colorNumericButton"
                     android:text="@string/button_comma"
+                    android:textColor="@color/colorNumericText"
                     android:textSize="@dimen/regular_button_size" />
 
                 <Button
@@ -237,7 +273,9 @@
                     android:layout_width="@dimen/regular_button_width"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/regular_button_half_weight"
+                    android:background="@color/colorBasicArithmeticButton"
                     android:text="@string/button_equal"
+                    android:textColor="@color/colorBasicArithmeticText"
                     android:textSize="@dimen/regular_button_size" />
             </LinearLayout>
         </LinearLayout>
