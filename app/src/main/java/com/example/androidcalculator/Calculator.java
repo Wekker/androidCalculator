@@ -8,68 +8,82 @@ import com.example.androidcalculator.databinding.ActivityMainBinding;
 
 public class Calculator {
     private ActivityMainBinding binding;
-    private Context context;
 
-    private static Calculator calculator;
-
-    private String multiplicationSign;
-    private String divisionSign;
-    private String additionSign;
-    private String subtractionSign;
+    private static volatile Calculator calculator;
+    private final String notANumber;
+    private final String multiplicationSign;
+    private final String divisionSign;
+    private final String additionSign;
+    private final String subtractionSign;
     private String operator;
     private double value1;
     private double value2;
 
 
     private Calculator(final Context context) {
-        calculator = this;
-        this.context = context;
-        this.multiplicationSign = context.getString(R.string.button_multiply);
-        this.divisionSign = context.getString(R.string.button_divide);
-        this.additionSign = context.getString(R.string.button_add);
-        this.subtractionSign = context.getString(R.string.button_subtract);
+        if (Calculator.calculator == null) {
+            this.notANumber = context.getString(R.string.display_text_not_a_number);
+            this.multiplicationSign = context.getString(R.string.button_multiply);
+            this.divisionSign = context.getString(R.string.button_divide);
+            this.additionSign = context.getString(R.string.button_add);
+            this.subtractionSign = context.getString(R.string.button_subtract);
+        } else {
+            throw new RuntimeException("Use getCalculator for singleton instantiation!");
+        }
     }
 
-    public static Calculator getCalculator() {
-        return calculator;
+    static Calculator getCalculator(Context context) {
+        if (Calculator.calculator == null) {
+            synchronized (Calculator.class) {
+                if (Calculator.calculator == null) {
+                    Calculator.calculator = new Calculator(context);
+                }
+            }
+        }
+        return Calculator.calculator;
     }
 
-    public void start(Activity activity) {
-        binding = DataBindingUtil.setContentView(activity, R.layout.activity_main);
+    protected Calculator readResolve() {
+        return Calculator.calculator;
     }
 
-    public double calculate() {
+    public String composeCalculate() {
+        if (this.operator.equals(this.divisionSign) && this.value2 == 0) {
+            return notANumber;
+        }
+
+        return Double.toString(calculate());
+    }
+
+    private double calculate() {
         double result;
-
-        if (operator.equals(multiplicationSign)) {
+        if (this.operator.equals(this.multiplicationSign)) {
             result = this.multiply();
-        } else if (operator.equals(divisionSign)) {
+        } else if (this.operator.equals(this.divisionSign)) {
             result = this.divide();
-        } else if (operator.equals(subtractionSign)) {
+        } else if (this.operator.equals(this.subtractionSign)) {
             result = this.subtract();
-        } else if (operator.equals(additionSign)) {
+        } else if (this.operator.equals(this.additionSign)) {
             result = this.add();
         } else {
-            result = value2;
+            result = this.value1;
         }
-        value1 = result;
-
         return result;
     }
 
     private double add() {
-        return value1 + value2;
+        return this.value1 += this.value2;
     }
 
     private double subtract() {
-        return value1 - value2;
+        return this.value1 -= this.value2;
     }
 
     private double multiply() {
-        return value1 - value2;
+        return this.value1 -= this.value2;
     }
 
     private double divide() {
-        return value1 / value2;
+        return this.value1 /= this.value2;
     }
 }
