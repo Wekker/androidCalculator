@@ -47,7 +47,7 @@ public class Calculator {
         return Calculator.calculator;
     }
 
-    public String composeCalculate() {
+    public String composeCalculation() {
         if (this.operator.equals(this.divisionSign) && this.value2 == 0) {
             return notANumber;
         }
@@ -66,7 +66,7 @@ public class Calculator {
         } else if (this.operator.equals(this.additionSign)) {
             result = this.add();
         } else {
-            result = this.value1;
+            result = this.value2;
         }
         return result;
     }
