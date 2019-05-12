@@ -27,6 +27,7 @@
             android:text="@string/display_initial_value"
             android:textColor="@color/colorMainDislayText"
             android:textSize="200sp"
+            android:maxLines="1"
             app:autoSizeTextType="uniform" />
 
         <LinearLayout
