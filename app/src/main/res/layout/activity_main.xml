@@ -37,246 +37,123 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/first_row"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="@dimen/regular_button_weight">
+                android:id="@+id/first_row_button_panel"
+                style="@style/RegularButtonPanel">
 
                 <Button
                     android:id="@+id/button_clear"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/advanced_arithmetic_button_border"
-                    android:text="@string/button_clear"
-                    android:textColor="@color/colorAdvancedArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/AdvancedArithmeticButtonStyle"
+                    android:text="@string/button_clear" />
 
                 <Button
                     android:id="@+id/button_arithmetic_sign"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/advanced_arithmetic_button_border"
-                    android:text="@string/button_arithmetic_sign"
-                    android:textColor="@color/colorAdvancedArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/AdvancedArithmeticButtonStyle"
+                    android:text="@string/button_arithmetic_sign" />
 
                 <Button
                     android:id="@+id/button_percentage"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/advanced_arithmetic_button_border"
-                    android:text="@string/button_percentage"
-                    android:textColor="@color/colorAdvancedArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/AdvancedArithmeticButtonStyle"
+                    android:text="@string/button_percentage" />
 
                 <Button
                     android:id="@+id/button_divide"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/basic_arithmetic_button_border"
-                    android:text="@string/button_divide"
-                    android:textColor="@color/colorBasicArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/BasicArithmeticButtonStyle"
+                    android:text="@string/button_divide" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/second_row"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="@dimen/regular_button_weight">
+                android:id="@+id/second_row_button_panel"
+                style="@style/RegularButtonPanel">
 
                 <Button
                     android:id="@+id/button_seven"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_seven"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_seven" />
 
                 <Button
                     android:id="@+id/button_eight"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_eight"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_eight" />
 
                 <Button
                     android:id="@+id/button_nine"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_nine"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_nine" />
 
                 <Button
                     android:id="@+id/button_multiply"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/basic_arithmetic_button_border"
-                    android:text="@string/button_multiply"
-                    android:textColor="@color/colorBasicArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/BasicArithmeticButtonStyle"
+                    android:text="@string/button_multiply" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/third_row"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="@dimen/regular_button_weight">
+                android:id="@+id/third_row_button_panel"
+                style="@style/RegularButtonPanel">
 
                 <Button
                     android:id="@+id/button_four"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_four"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_four" />
 
                 <Button
                     android:id="@+id/button_five"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_five"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_five" />
 
                 <Button
                     android:id="@+id/button_six"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_six"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_six" />
 
                 <Button
                     android:id="@+id/button_minus"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/basic_arithmetic_button_border"
-                    android:text="@string/button_subtract"
-                    android:textColor="@color/colorBasicArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/BasicArithmeticButtonStyle"
+                    android:text="@string/button_subtract" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/fourth_row"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="@dimen/regular_button_weight">
+                android:id="@+id/fourth_row_button_panel"
+                style="@style/RegularButtonPanel">
 
                 <Button
                     android:id="@+id/button_one"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_one"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_one" />
 
                 <Button
                     android:id="@+id/button_two"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_two"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_two" />
 
                 <Button
                     android:id="@+id/button_three"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_three"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_three" />
 
                 <Button
                     android:id="@+id/button_plus"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/basic_arithmetic_button_border"
-                    android:text="@string/button_add"
-                    android:textColor="@color/colorBasicArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/BasicArithmeticButtonStyle"
+                    android:text="@string/button_add" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/fifth_row"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="@dimen/regular_button_weight">
+                android:id="@+id/fifth_row_button_panel"
+                style="@style/RegularButtonPanel">
 
                 <Button
                     android:id="@+id/button_zero"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_zero"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonZeroStyle"
+                    android:text="@string/button_zero" />
 
                 <Button
                     android:id="@+id/button_comma"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_half_weight"
-                    android:background="@drawable/numeric_button_border"
-                    android:text="@string/button_comma"
-                    android:textColor="@color/colorNumericText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/NumericButtonStyle"
+                    android:text="@string/button_comma" />
 
                 <Button
                     android:id="@+id/button_equal"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/regular_button_width"
-                    android:layout_height="match_parent"
-                    android:layout_weight="@dimen/regular_button_half_weight"
-                    android:background="@drawable/basic_arithmetic_button_border"
-                    android:text="@string/button_equal"
-                    android:textColor="@color/colorBasicArithmeticText"
-                    android:textSize="@dimen/regular_button_size" />
+                    style="@style/BasicArithmeticButtonStyle"
+                    android:text="@string/button_equal" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
