@@ -6,6 +6,8 @@ import android.databinding.DataBindingUtil;
 
 import com.example.androidcalculator.databinding.ActivityMainBinding;
 
+import java.text.DecimalFormat;
+
 public class Calculator {
     private ActivityMainBinding binding;
 
@@ -16,8 +18,9 @@ public class Calculator {
     private final String additionSign;
     private final String subtractionSign;
     private String operator;
-    private double value1;
-    private double value2;
+    private double value1 = 0;
+    private double value2 = 0;
+    private DecimalFormat decimalFormat;
 
 
     private Calculator(final Context context) {
@@ -27,9 +30,14 @@ public class Calculator {
             this.divisionSign = context.getString(R.string.button_divide);
             this.additionSign = context.getString(R.string.button_add);
             this.subtractionSign = context.getString(R.string.button_subtract);
+            this.decimalFormat = new DecimalFormat("#.###############");
         } else {
             throw new RuntimeException("Use getCalculator for singleton instantiation!");
         }
+    }
+
+    static Calculator getCalculator() {
+        return Calculator.calculator;
     }
 
     static Calculator getCalculator(Context context) {
@@ -47,12 +55,12 @@ public class Calculator {
         return Calculator.calculator;
     }
 
-    public String composeCalculation() {
-        if (this.operator.equals(this.divisionSign) && this.value2 == 0) {
+    String composeCalculation() {
+        if (this.operator == null || this.operator.equals(this.divisionSign) && this.value2 == 0) {
             return notANumber;
         }
 
-        return Double.toString(calculate());
+        return decimalFormat.format(calculate());
     }
 
     private double calculate() {
