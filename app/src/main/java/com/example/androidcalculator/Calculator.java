@@ -1,8 +1,7 @@
 package com.example.androidcalculator;
 
-import android.app.Activity;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
+import android.util.Log;
 
 import com.example.androidcalculator.databinding.ActivityMainBinding;
 
@@ -18,10 +17,10 @@ public class Calculator {
     private final String additionSign;
     private final String subtractionSign;
     private String operator;
-    private double value1 = 0;
-    private double value2 = 0;
+    private double firstValue = 0;
+    private double secondValue = 0;
+    private boolean isSecondValueSet = false;
     private DecimalFormat decimalFormat;
-
 
     private Calculator(final Context context) {
         if (Calculator.calculator == null) {
@@ -56,15 +55,52 @@ public class Calculator {
     }
 
     String composeCalculation() {
-        if (this.operator == null || this.operator.equals(this.divisionSign) && this.value2 == 0) {
+        if (this.operator == null || this.operator.equals(this.divisionSign) && this.secondValue == 0) {
             return notANumber;
         }
 
         return decimalFormat.format(calculate());
     }
 
+    void setValue(String value) {
+        if (this.operator == null) {
+            this.setFirstValue(value);
+        } else {
+            this.setSecondValue(value);
+            this.isSecondValueSet = true;
+        }
+    }
+
+    private void setFirstValue(String value) {
+        try {
+            this.firstValue = Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            Log.e("NumberFormatException", e.getMessage());
+        }
+    }
+
+    private void setSecondValue(String value) {
+        try {
+            this.secondValue = Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            Log.e("NumberFormatException", e.getMessage());
+        }
+    }
+
+    void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    boolean isOperatorSet() {
+        return this.operator != null;
+    }
+
     private double calculate() {
         double result;
+        if (!isSecondValueSet) {
+            return this.firstValue;
+        }
+
         if (this.operator.equals(this.multiplicationSign)) {
             result = this.multiply();
         } else if (this.operator.equals(this.divisionSign)) {
@@ -74,24 +110,25 @@ public class Calculator {
         } else if (this.operator.equals(this.additionSign)) {
             result = this.add();
         } else {
-            result = this.value2;
+            result = this.secondValue;
         }
+
         return result;
     }
 
     private double add() {
-        return this.value1 += this.value2;
+        return this.firstValue += this.secondValue;
     }
 
     private double subtract() {
-        return this.value1 -= this.value2;
+        return this.firstValue -= this.secondValue;
     }
 
     private double multiply() {
-        return this.value1 -= this.value2;
+        return this.firstValue -= this.secondValue;
     }
 
     private double divide() {
-        return this.value1 /= this.value2;
+        return this.firstValue /= this.secondValue;
     }
 }
