@@ -1,26 +1,40 @@
 package com.example.androidcalculator;
 
 import android.content.Context;
-import android.util.Log;
 
+import android.widget.Button;
 import com.example.androidcalculator.databinding.ActivityMainBinding;
 
 import java.text.DecimalFormat;
 
 public class Calculator {
     private ActivityMainBinding binding;
+    private Button              buttonZero;
+    private Button              buttonOne;
+    private Button              buttonTwo;
+    private Button              buttonThree;
+    private Button              buttonFour;
+    private Button              buttonFive;
+    private Button              buttonSix;
+    private Button              buttonSeven;
+    private Button              buttonEight;
+    private Button              buttonNine;
+    private Button              buttonComma;
 
-    private static volatile Calculator calculator;
-    private final String notANumber;
-    private final String multiplicationSign;
-    private final String divisionSign;
-    private final String additionSign;
-    private final String subtractionSign;
-    private String operator;
-    private double firstValue = 0;
-    private double secondValue = 0;
-    private boolean isSecondValueSet = false;
-    private DecimalFormat decimalFormat;
+    private static volatile Calculator    calculator;
+    private final           String        notANumber;
+    private final           String        multiplicationSign;
+    private final           String        divisionSign;
+    private final           String        additionSign;
+    private final           String        subtractionSign;
+    private                 String        operator;
+    private                 String        secondOperator;
+    private                 double        firstValue             = 0;
+    private                 double        secondValue            = 0;
+    private                 StringBuilder secondTextValue;
+    private                 boolean       hasOperatorJustBeenSet = false;
+    private                 boolean       isSecondValueSet       = false;
+    private                 DecimalFormat decimalFormat;
 
     private Calculator(final Context context) {
         if (Calculator.calculator == null) {
@@ -30,6 +44,7 @@ public class Calculator {
             this.additionSign = context.getString(R.string.button_add);
             this.subtractionSign = context.getString(R.string.button_subtract);
             this.decimalFormat = new DecimalFormat("#.###############");
+            this.secondTextValue = new StringBuilder("");
         } else {
             throw new RuntimeException("Use getCalculator for singleton instantiation!");
         }
@@ -54,7 +69,7 @@ public class Calculator {
         return Calculator.calculator;
     }
 
-    String composeCalculation() {
+    String computeCalculation() {
         if (this.operator == null || this.operator.equals(this.divisionSign) && this.secondValue == 0) {
             return notANumber;
         }
@@ -62,37 +77,51 @@ public class Calculator {
         return decimalFormat.format(calculate());
     }
 
-    void setValue(String value) {
-        if (this.operator == null) {
-            this.setFirstValue(value);
+
+    String getDisplayValue(String inputValue) {
+        String newValue = "";
+        if (this.isNumeric(inputValue)) {
+            newValue = this.getValueByNumericInput(inputValue);
         } else {
-            this.setSecondValue(value);
-            this.isSecondValueSet = true;
+
         }
+        return newValue;
     }
 
-    private void setFirstValue(String value) {
-        try {
-            this.firstValue = Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            Log.e("NumberFormatException", e.getMessage());
+    private String getValueByNumericInput(String inputValue) {
+        String newValue;
+        if (this.hasOperatorJustBeenSet && !this.hasDecimal(inputValue)) {
+            if (this.secondValue == 0) {
+                if (this.hasDecimal(this.secondTextValue.toString())) {
+                    newValue = this.secondTextValue.append(inputValue).toString();
+                } else {
+                    this.secondTextValue = new StringBuilder(inputValue);
+                    newValue = this.secondTextValue.toString();
+                }
+            }
+            this.secondTextValue = new StringBuilder(inputValue);
+            newValue = this.secondTextValue.toString();
+        } else if (this.hasDecimal(inputValue)) {
+            newValue = this.secondTextValue.append(inputValue).toString();
+        } else {
+            newValue = this.secondTextValue.append(inputValue).toString();
         }
-    }
 
-    private void setSecondValue(String value) {
-        try {
-            this.secondValue = Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            Log.e("NumberFormatException", e.getMessage());
+        if (this.secondValue == 0) {
+            if (this.hasDecimal(this.secondTextValue.toString())) {
+                newValue = this.secondTextValue.append(inputValue).toString();
+            } else {
+                this.secondTextValue = new StringBuilder(inputValue);
+                newValue = this.secondTextValue.toString();
+            }
+        } else if (!this.hasDecimal(inputValue) && !this.hasDecimal(this.secondTextValue.toString())) {
+            newValue = this.secondTextValue.append(inputValue).toString();
+        } else {
+            newValue = this.secondTextValue.toString();
         }
-    }
+        this.secondValue = Double.parseDouble(newValue);
 
-    void setOperator(String operator) {
-        this.operator = operator;
-    }
-
-    boolean isOperatorSet() {
-        return this.operator != null;
+        return newValue;
     }
 
     private double calculate() {
@@ -130,5 +159,17 @@ public class Calculator {
 
     private double divide() {
         return this.firstValue /= this.secondValue;
+    }
+
+    private boolean isNumeric(String value) {
+        return value.matches("-?\\d+(,\\d+)?");
+    }
+
+    private boolean isAdvancedArithmeticSymbol(String value) {
+        return value.matches("(.*[%].*)");
+    }
+
+    private boolean hasDecimal(String value) {
+        return value.matches("(.*[,].*)");
     }
 }

@@ -15,8 +15,7 @@ class BasicOperatorButtonOnClcikListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Calculator.getCalculator().setOperator(this.button.getText().toString());
-        String result = Calculator.getCalculator().composeCalculation();
-        this.displayPanel.setText(result);
+        String newValue = Calculator.getCalculator().getDisplayValue(this.button.getText().toString());
+        this.displayPanel.setText(newValue);
     }
 }
