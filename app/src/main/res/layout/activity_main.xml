@@ -47,9 +47,9 @@
                     android:text="@string/button_clear" />
 
                 <Button
-                    android:id="@+id/button_arithmetic_sign"
+                    android:id="@+id/button_plus_minus"
                     style="@style/AdvancedArithmeticButtonStyle"
-                    android:text="@string/button_arithmetic_sign" />
+                    android:text="@string/button_plus_minus" />
 
                 <Button
                     android:id="@+id/button_percentage"
@@ -154,6 +154,7 @@
                 <Button
                     android:id="@+id/button_equal"
                     style="@style/BasicArithmeticButtonStyle"
+                    android:onClick=""
                     android:text="@string/button_equal" />
             </LinearLayout>
         </LinearLayout>

@@ -2,7 +2,7 @@
     <string name="app_name">AndroidCalculator</string>
     <string name="display_text_not_a_number">Not a number</string>
     <string name="button_clear">C</string>
-    <string name="button_arithmetic_sign">\u002b\u2044\u002d</string>
+    <string name="button_plus_minus">\u002b\u2044\u002d</string>
     <string name="button_percentage">\u0025</string>
     <string name="button_divide">\u00F7</string>
     <string name="button_multiply">\u2715</string>

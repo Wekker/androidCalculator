@@ -2,71 +2,97 @@ package com.example.androidcalculator;
 
 import android.content.Context;
 
+import android.databinding.ViewDataBinding;
+import android.renderscript.ScriptGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import com.example.androidcalculator.databinding.ActivityMainBinding;
 
 import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Stack;
 
 public class Calculator {
+    private CalculatorModel calculatorModel;
+
     private ActivityMainBinding binding;
-    private Button              buttonZero;
-    private Button              buttonOne;
-    private Button              buttonTwo;
-    private Button              buttonThree;
-    private Button              buttonFour;
-    private Button              buttonFive;
-    private Button              buttonSix;
-    private Button              buttonSeven;
-    private Button              buttonEight;
-    private Button              buttonNine;
-    private Button              buttonComma;
 
-    private static volatile Calculator    calculator;
-    private final           String        notANumber;
-    private final           String        multiplicationSign;
-    private final           String        divisionSign;
-    private final           String        additionSign;
-    private final           String        subtractionSign;
-    private                 String        operator;
-    private                 String        secondOperator;
-    private                 double        firstValue             = 0;
-    private                 double        secondValue            = 0;
-    private                 StringBuilder secondTextValue;
-    private                 boolean       hasOperatorJustBeenSet = false;
-    private                 boolean       isSecondValueSet       = false;
-    private                 DecimalFormat decimalFormat;
+    private StringBuilder inputValue;
 
-    private Calculator(final Context context) {
-        if (Calculator.calculator == null) {
-            this.notANumber = context.getString(R.string.display_text_not_a_number);
-            this.multiplicationSign = context.getString(R.string.button_multiply);
-            this.divisionSign = context.getString(R.string.button_divide);
-            this.additionSign = context.getString(R.string.button_add);
-            this.subtractionSign = context.getString(R.string.button_subtract);
-            this.decimalFormat = new DecimalFormat("#.###############");
-            this.secondTextValue = new StringBuilder("");
+    private final String        notANumber;
+    private final String        multiplicationSign;
+    private final String        divisionSign;
+    private final String        additionSign;
+    private final String        subtractionSign;
+    private       String        operator;
+    private       String        secondOperator;
+    private       double        firstValue             = 0;
+    private       double        secondValue            = 0;
+    private       StringBuilder secondTextValue;
+    private       boolean       hasOperatorJustBeenSet = false;
+    private       boolean       isSecondValueSet       = false;
+    private       DecimalFormat decimalFormat;
+
+    Calculator(final Context context, ViewDataBinding binding) {
+        this.inputValue = new StringBuilder();
+        this.notANumber = context.getString(R.string.display_text_not_a_number);
+        this.multiplicationSign = context.getString(R.string.button_multiply);
+        this.divisionSign = context.getString(R.string.button_divide);
+        this.additionSign = context.getString(R.string.button_add);
+        this.subtractionSign = context.getString(R.string.button_subtract);
+        this.decimalFormat = new DecimalFormat("#.###############");
+        this.secondTextValue = new StringBuilder("");
+
+        if (binding instanceof ActivityMainBinding) {
+            initSimpleMode((ActivityMainBinding) binding);
         } else {
-            throw new RuntimeException("Use getCalculator for singleton instantiation!");
+            // TO-DO change to advanced mode
+            initSimpleMode((ActivityMainBinding) binding);
         }
     }
 
-    static Calculator getCalculator() {
-        return Calculator.calculator;
+    void initSimpleMode(ActivityMainBinding binding) {
+        CalculatorModel calculatorModel = new CalculatorModel(binding.displayPanel, binding.buttonZero, binding.buttonOne, binding.buttonTwo, binding.buttonThree, binding.buttonFour, binding.buttonFive, binding.buttonSix, binding.buttonSeven, binding.buttonEight, binding.buttonNine, binding.buttonComma, binding.buttonMultiply, binding.buttonDivide, binding.buttonAdd, binding.buttonSubtract, binding.buttonPercentage, binding.buttonClear, binding.buttonPlusMinus, binding.buttonEqual);
+        this.setNumericButtonOnClickListener(calculatorModel.getZero());
+        this.setNumericButtonOnClickListener(calculatorModel.getOne());
+        this.setNumericButtonOnClickListener(calculatorModel.getTwo());
+        this.setNumericButtonOnClickListener(calculatorModel.getThree());
+        this.setNumericButtonOnClickListener(calculatorModel.getFour());
+        this.setNumericButtonOnClickListener(calculatorModel.getFive());
+        this.setNumericButtonOnClickListener(calculatorModel.getSix());
+        this.setNumericButtonOnClickListener(calculatorModel.getSeven());
+        this.setNumericButtonOnClickListener(calculatorModel.getEight());
+        this.setNumericButtonOnClickListener(calculatorModel.getNine());
+        this.setNumericButtonOnClickListener(calculatorModel.getComma());
+
+        this.setBasicOperatorButtonOnClcikListener(calculatorModel.getMultiply());
+        this.setBasicOperatorButtonOnClcikListener(calculatorModel.getDivide());
+        this.setBasicOperatorButtonOnClcikListener(calculatorModel.getAdd());
+        this.setBasicOperatorButtonOnClcikListener(calculatorModel.getSubtract());
     }
 
-    static Calculator getCalculator(Context context) {
-        if (Calculator.calculator == null) {
-            synchronized (Calculator.class) {
-                if (Calculator.calculator == null) {
-                    Calculator.calculator = new Calculator(context);
-                }
-            }
+    private void setNumericButtonOnClickListener(Button button) {
+        button.setOnClickListener(new NumericButtonOnClickListener(this, button));
+    }
+
+    void pressNumericButton(String buttonName) {
+        if (isAllowedInput(buttonName)) {
+//            this.inputValue.append(buttonName);
         }
-        return Calculator.calculator;
     }
 
-    protected Calculator readResolve() {
-        return Calculator.calculator;
+    boolean isAllowedInput(String buttonName) {
+        this.inputValue.append(this.calculatorModel.getPlusMinus().getText().toString());
+        String lastChar = this.inputValue.substring(this.inputValue.length() - 1);
+        switch (lastChar) {
+            case "test":
+                break;
+        }
+        return true;
+    }
+
+    private void setBasicOperatorButtonOnClcikListener(Button button) {
+        button.setOnClickListener(new BasicOperatorButtonOnClcikListener(button));
     }
 
     String computeCalculation() {
