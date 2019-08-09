@@ -5,14 +5,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 class BasicOperatorButtonOnClcikListener implements View.OnClickListener {
-    private Button button;
+    private TextView   displayPanel;
+    private Button     button;
+    private Calculator calculator;
 
-    BasicOperatorButtonOnClcikListener(Button button) {
+    BasicOperatorButtonOnClcikListener(TextView displayPanel, Calculator calculator, Button button) {
+        this.displayPanel = displayPanel;
         this.button = button;
+        this.calculator = calculator;
     }
 
     @Override
     public void onClick(View v) {
-
+        this.calculator.pressNumericButton(this.button.getText().toString());
     }
 }
