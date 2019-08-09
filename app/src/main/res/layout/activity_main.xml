@@ -154,7 +154,6 @@
                 <Button
                     android:id="@+id/button_equal"
                     style="@style/BasicArithmeticButtonStyle"
-                    android:onClick=""
                     android:text="@string/button_equal" />
             </LinearLayout>
         </LinearLayout>
