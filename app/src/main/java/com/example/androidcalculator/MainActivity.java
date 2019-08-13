@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setNumericButtonOnClickListener(TextView displayPanel, Calculator calculator, Button button) {
-        button.setOnClickListener(new NumericButtonOnClickListener(displayPanel, calculator, button));
+        button.setOnClickListener(new NumericButtonOnClickListener(calculator, button));
     }
 
     private void setBasicOperatorButtonOnClcikListener(TextView displayPanel, Calculator calculator, Button button) {
-        button.setOnClickListener(new BasicOperatorButtonOnClcikListener(displayPanel, calculator, button));
+        button.setOnClickListener(new BasicOperatorButtonOnClcikListener(calculator, button));
     }
 }

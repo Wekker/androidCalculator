@@ -32,7 +32,6 @@
             android:paddingLeft="15sp"
             android:paddingEnd="15dp"
             android:paddingRight="15sp"
-            android:text="@{calculator.getDisplayPanel()}"
             android:textColor="@color/colorMainDislayText"
             android:textSize="200sp"
             app:autoSizeTextType="uniform" />

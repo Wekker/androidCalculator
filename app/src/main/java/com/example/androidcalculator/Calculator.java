@@ -21,7 +21,7 @@ public class Calculator extends ViewModel {
     }
 
     MutableLiveData<String> getDisplayPanelValue() {
-        if (displayPanelValue == null) {
+        if (displayPanelValueLive == null) {
             displayPanelValueLive = new MutableLiveData<String>();
         }
         return displayPanelValueLive;
@@ -29,18 +29,16 @@ public class Calculator extends ViewModel {
 
     void pressNumericButton(String value) {
         displayPanelValue.append(value);
+        updateDisplay();
     }
 
     void pressBasicOperatorButton(String value) {
         displayPanelValue.append(value);
+        updateDisplay();
     }
 
-    private double add(double firstValue, double secondValue) {
-        return firstValue += secondValue;
-    }
-
-    private double subtract(double firstValue, double secondValue) {
-        return firstValue -= secondValue;
+    private void updateDisplay() {
+        displayPanelValueLive.setValue(displayPanelValue.toString());
     }
 
     private double multiply(double firstValue, double secondValue) {
@@ -49,6 +47,14 @@ public class Calculator extends ViewModel {
 
     private double divide(double firstValue, double secondValue) {
         return firstValue /= secondValue;
+    }
+
+    private double add(double firstValue, double secondValue) {
+        return firstValue += secondValue;
+    }
+
+    private double subtract(double firstValue, double secondValue) {
+        return firstValue -= secondValue;
     }
 
     private boolean isNumeric(String value) {
