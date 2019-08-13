@@ -5,8 +5,9 @@
     tools:context=".MainActivity">
 
     <data>
+
         <variable
-            name="user"
+            name="calculator"
             type="com.example.androidcalculator.Calculator" />
     </data>
 
@@ -31,7 +32,7 @@
             android:paddingLeft="15sp"
             android:paddingEnd="15dp"
             android:paddingRight="15sp"
-            android:text="@string/display_initial_value"
+            android:text="@{calculator.getDisplayPanel()}"
             android:textColor="@color/colorMainDislayText"
             android:textSize="200sp"
             app:autoSizeTextType="uniform" />
@@ -50,21 +51,25 @@
                 <Button
                     android:id="@+id/button_clear"
                     style="@style/AdvancedArithmeticButtonStyle"
+                    android:tag="clear"
                     android:text="@string/button_clear" />
 
                 <Button
                     android:id="@+id/button_plus_minus"
                     style="@style/AdvancedArithmeticButtonStyle"
+                    android:tag="+-"
                     android:text="@string/button_plus_minus" />
 
                 <Button
                     android:id="@+id/button_percentage"
                     style="@style/AdvancedArithmeticButtonStyle"
+                    android:tag="%"
                     android:text="@string/button_percentage" />
 
                 <Button
                     android:id="@+id/button_divide"
                     style="@style/BasicArithmeticButtonStyle"
+                    android:tag="/"
                     android:text="@string/button_divide" />
             </LinearLayout>
 
@@ -75,21 +80,25 @@
                 <Button
                     android:id="@+id/button_seven"
                     style="@style/NumericButtonStyle"
+                    android:tag="7"
                     android:text="@string/button_seven" />
 
                 <Button
                     android:id="@+id/button_eight"
                     style="@style/NumericButtonStyle"
+                    android:tag="8"
                     android:text="@string/button_eight" />
 
                 <Button
                     android:id="@+id/button_nine"
                     style="@style/NumericButtonStyle"
+                    android:tag="9"
                     android:text="@string/button_nine" />
 
                 <Button
                     android:id="@+id/button_multiply"
                     style="@style/BasicArithmeticButtonStyle"
+                    android:tag="*"
                     android:text="@string/button_multiply" />
             </LinearLayout>
 
@@ -100,21 +109,25 @@
                 <Button
                     android:id="@+id/button_four"
                     style="@style/NumericButtonStyle"
+                    android:tag="4"
                     android:text="@string/button_four" />
 
                 <Button
                     android:id="@+id/button_five"
                     style="@style/NumericButtonStyle"
+                    android:tag="5"
                     android:text="@string/button_five" />
 
                 <Button
                     android:id="@+id/button_six"
                     style="@style/NumericButtonStyle"
+                    android:tag="6"
                     android:text="@string/button_six" />
 
                 <Button
                     android:id="@+id/button_subtract"
                     style="@style/BasicArithmeticButtonStyle"
+                    android:tag="-"
                     android:text="@string/button_subtract" />
             </LinearLayout>
 
@@ -125,21 +138,25 @@
                 <Button
                     android:id="@+id/button_one"
                     style="@style/NumericButtonStyle"
+                    android:tag="1"
                     android:text="@string/button_one" />
 
                 <Button
                     android:id="@+id/button_two"
                     style="@style/NumericButtonStyle"
+                    android:tag="2"
                     android:text="@string/button_two" />
 
                 <Button
                     android:id="@+id/button_three"
                     style="@style/NumericButtonStyle"
+                    android:tag="3"
                     android:text="@string/button_three" />
 
                 <Button
                     android:id="@+id/button_add"
                     style="@style/BasicArithmeticButtonStyle"
+                    android:tag="+"
                     android:text="@string/button_add" />
             </LinearLayout>
 
@@ -150,16 +167,19 @@
                 <Button
                     android:id="@+id/button_zero"
                     style="@style/NumericButtonZeroStyle"
+                    android:tag="0"
                     android:text="@string/button_zero" />
 
                 <Button
                     android:id="@+id/button_comma"
                     style="@style/NumericButtonStyle"
+                    android:tag=","
                     android:text="@string/button_comma" />
 
                 <Button
                     android:id="@+id/button_equal"
                     style="@style/BasicArithmeticButtonStyle"
+                    android:tag="="
                     android:text="@string/button_equal" />
             </LinearLayout>
         </LinearLayout>

@@ -1,12 +1,15 @@
 package com.example.androidcalculator;
 
-import android.content.Context;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 
 import java.text.DecimalFormat;
 
-public class Calculator {
+public class Calculator extends ViewModel {
+    private MutableLiveData<String> displayPanelValueLive;
+    private StringBuilder           displayPanelValue = new StringBuilder();
+
     private       double        display            = 0;
-    private       StringBuilder inputValue         = new StringBuilder();
     private final String        commaSign          = ",";
     private final String        multiplicationSign = "*";
     private final String        divisionSign       = "/";
@@ -15,6 +18,21 @@ public class Calculator {
     private final DecimalFormat decimalFormat      = new DecimalFormat("#.###############");
 
     Calculator() {
+    }
+
+    MutableLiveData<String> getDisplayPanelValue() {
+        if (displayPanelValue == null) {
+            displayPanelValueLive = new MutableLiveData<String>();
+        }
+        return displayPanelValueLive;
+    }
+
+    void pressNumericButton(String value) {
+        displayPanelValue.append(value);
+    }
+
+    void pressBasicOperatorButton(String value) {
+        displayPanelValue.append(value);
     }
 
     private double add(double firstValue, double secondValue) {

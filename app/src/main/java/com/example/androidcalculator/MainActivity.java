@@ -1,6 +1,8 @@
 package com.example.androidcalculator;
 
+import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,8 +17,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        final ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         this.calculator = new Calculator();
+
+        final Observer<String> displayPanelObserver = new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String value) {
+                binding.displayPanel.setText(value);
+            }
+        };
+
+        calculator.getDisplayPanelValue().observe(this, displayPanelObserver);
 
         setNumericButtonOnClickListener(binding.displayPanel, calculator, binding.buttonZero);
         setNumericButtonOnClickListener(binding.displayPanel, calculator, binding.buttonOne);
@@ -31,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         setNumericButtonOnClickListener(binding.displayPanel, calculator, binding.buttonComma);
 
         this.setBasicOperatorButtonOnClcikListener(binding.displayPanel, calculator, binding.buttonMultiply);
-
+        this.setBasicOperatorButtonOnClcikListener(binding.displayPanel, calculator, binding.buttonDivide);
+        this.setBasicOperatorButtonOnClcikListener(binding.displayPanel, calculator, binding.buttonAdd);
+        this.setBasicOperatorButtonOnClcikListener(binding.displayPanel, calculator, binding.buttonSubtract);
     }
 
     private void setNumericButtonOnClickListener(TextView displayPanel, Calculator calculator, Button button) {

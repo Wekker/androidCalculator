@@ -17,6 +17,6 @@ class BasicOperatorButtonOnClcikListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        this.calculator.pressNumericButton(this.button.getText().toString());
+        this.calculator.pressBasicOperatorButton(this.button.getTag().toString());
     }
 }
