@@ -14,6 +14,6 @@ class NumericButtonOnClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        this.calculator.pressNumericButton(this.button.getText().toString());
+        this.calculator.pressNumericButton(this.button.getTag().toString());
     }
 }

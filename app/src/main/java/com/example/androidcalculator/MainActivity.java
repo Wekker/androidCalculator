@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        calculator.getDisplayPanelValue().observe(this, displayPanelObserver);
+        calculator.getDisplayPanelValueLive().observe(this, displayPanelObserver);
 
         setNumericButtonOnClickListener(binding.displayPanel, calculator, binding.buttonZero);
         setNumericButtonOnClickListener(binding.displayPanel, calculator, binding.buttonOne);

@@ -9,18 +9,21 @@ public class Calculator extends ViewModel {
     private MutableLiveData<String> displayPanelValueLive;
     private StringBuilder           displayPanelValue = new StringBuilder();
 
-    private       double        display            = 0;
-    private final String        commaSign          = ",";
-    private final String        multiplicationSign = "*";
-    private final String        divisionSign       = "/";
-    private final String        additionSign       = "+";
-    private final String        subtractionSign    = "-";
-    private final DecimalFormat decimalFormat      = new DecimalFormat("#.###############");
+    private       double display            = 0;
+    private final char   commaSign          = ',';
+    private final char   multiplicationSign = '*';
+    private final char   divisionSign       = '/';
+    private final char   additionSign       = '+';
+    private final char   subtractionSign    = '-';
+    private final char   bracketOpenSign    = '(';
+    private final char   bracketCloseSign   = ')';
+
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.###############");
 
     Calculator() {
     }
 
-    MutableLiveData<String> getDisplayPanelValue() {
+    MutableLiveData<String> getDisplayPanelValueLive() {
         if (displayPanelValueLive == null) {
             displayPanelValueLive = new MutableLiveData<String>();
         }
@@ -28,17 +31,49 @@ public class Calculator extends ViewModel {
     }
 
     void pressNumericButton(String value) {
-        displayPanelValue.append(value);
-        updateDisplay();
+        updateDisplayPanelValue(value);
     }
 
     void pressBasicOperatorButton(String value) {
-        displayPanelValue.append(value);
-        updateDisplay();
+        updateDisplayPanelValue(value);
     }
 
-    private void updateDisplay() {
+    void pressEqualButton() {
+        computeCalculation(displayPanelValue.toString());
+    }
+
+    void updateDisplayPanelValue(String value) {
+        displayPanelValue.append(value);
+        updateDisplayPanelLive();
+    }
+
+    private void updateDisplayPanelLive() {
         displayPanelValueLive.setValue(displayPanelValue.toString());
+    }
+
+    private void computeCalculation(String statement) {
+        for (int i = 0; i < statement.length(); i++) {
+            switch (statement.charAt(i)) {
+                case bracketOpenSign:
+                    break;
+            }
+        }
+
+
+        int fromIndex = statement.indexOf(bracketOpenSign);
+        if (fromIndex >= 0) {
+            String subStatement;
+
+            int toIndex = statement.lastIndexOf(bracketCloseSign);
+            if (toIndex >= 0) {
+                subStatement = statement.substring(fromIndex + 1, toIndex);
+            } else {
+                subStatement = statement.substring(fromIndex + 1, statement.length());
+            }
+
+            computeCalculation(subStatement);
+        }
+
     }
 
     private double multiply(double firstValue, double secondValue) {
