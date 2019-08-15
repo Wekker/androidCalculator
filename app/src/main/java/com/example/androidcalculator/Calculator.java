@@ -2,6 +2,7 @@ package com.example.androidcalculator;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.v4.util.Pair;
 
 import java.text.DecimalFormat;
 
@@ -39,7 +40,7 @@ public class Calculator extends ViewModel {
     }
 
     void pressEqualButton() {
-        computeCalculation(displayPanelValue.toString());
+        computeCalculation(displayPanelValue.toString().toCharArray());
     }
 
     void updateDisplayPanelValue(String value) {
@@ -51,30 +52,48 @@ public class Calculator extends ViewModel {
         displayPanelValueLive.setValue(displayPanelValue.toString());
     }
 
-    private void computeCalculation(String statement) {
-        for (int i = 0; i < statement.length(); i++) {
-            switch (statement.charAt(i)) {
+    //    11*(5+6)-3
+    private Object computeCalculation(char[] math, int index) {
+        int    nextIndex     = 0;
+        double currentNumber = 0;
+        String firstNumber         = "";
+        for (int i = index; i < math.length; i = nextIndex) {
+            switch (math[i]) {
+                case multiplicationSign:
+                    nextIndex = computeCalculation(math, i).;
+                    currentNumber = multiply(currentNumber, Double.parseDouble(firstNumber));
+                    break;
+                case divisionSign:
+                    break;
+                case additionSign:
+                    break;
+                case subtractionSign:
+                    break;
                 case bracketOpenSign:
                     break;
+                case bracketCloseSign:
+                    break;
+                default:
+                    firstNumber += math[i];
             }
         }
-
-
-        int fromIndex = statement.indexOf(bracketOpenSign);
-        if (fromIndex >= 0) {
-            String subStatement;
-
-            int toIndex = statement.lastIndexOf(bracketCloseSign);
-            if (toIndex >= 0) {
-                subStatement = statement.substring(fromIndex + 1, toIndex);
-            } else {
-                subStatement = statement.substring(fromIndex + 1, statement.length());
-            }
-
-            computeCalculation(subStatement);
-        }
-
     }
+
+//    private void computeBracketCalculation(String math) {
+//        int fromIndex = math.indexOf(bracketOpenSign);
+//        if (fromIndex >= 0) {
+//            String subMath;
+//
+//            int toIndex = math.lastIndexOf(bracketCloseSign);
+//            if (toIndex >= 0) {
+//                subMath = math.substring(fromIndex + 1, toIndex);
+//            } else {
+//                subMath = math.substring(fromIndex + 1, math.length());
+//            }
+//
+////            computeCalculation(subMath);
+//        }
+//    }
 
     private double multiply(double firstValue, double secondValue) {
         return firstValue -= secondValue;
