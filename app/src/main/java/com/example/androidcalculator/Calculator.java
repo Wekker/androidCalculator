@@ -4,10 +4,11 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 public class Calculator extends ViewModel {
-    private MutableLiveData<String> displayPanelValueLive;
+    private MutableLiveData<String> displayPanelLive;
     private StringBuilder           displayPanelValue = new StringBuilder();
 
     private final static String defaultDisplayValue = "0";
+    private final static String commaSign           = ",";
     private final static char   multiplicationSign  = '*';
     private final static char   divisionSign        = '/';
     private final static char   additionSign        = '+';
@@ -15,18 +16,24 @@ public class Calculator extends ViewModel {
     private final static char   bracketOpenSign     = '(';
     private final static char   bracketCloseSign    = ')';
 
-    private static boolean isMathComputed = false;
+    private boolean isDisplayReset = true;
+    private boolean hasBracket     = false;
+    private boolean isMathComputed = false;
 
 //    private final DecimalFormat decimalFormat = new DecimalFormat("#.###############");
 
     Calculator() {
+        updateDisplayPanelValue(defaultDisplayValue);
     }
 
-    MutableLiveData<String> getDisplayPanelValueLive() {
-        if (displayPanelValueLive == null) {
-            displayPanelValueLive = new MutableLiveData<>();
+    MutableLiveData<String> getDisplayPanelLive() {
+        if (displayPanelLive == null) {
+            displayPanelLive = new MutableLiveData<>();
         }
-        return displayPanelValueLive;
+
+        updateDisplayPanelLive();
+
+        return displayPanelLive;
     }
 
     void pressNumericButton(String value) {
@@ -38,8 +45,7 @@ public class Calculator extends ViewModel {
     }
 
     void pressClearButton() {
-        displayPanelValue.replace(0, displayPanelValue.length(), defaultDisplayValue);
-        updateDisplayPanelLive();
+        resetDisplay();
     }
 
     void pressEqualOperatorButton() {
@@ -55,13 +61,16 @@ public class Calculator extends ViewModel {
         } else {
             displayPanelValue.append(inputValue);
         }
+        isMathComputed = false;
 
-        validate(displayPanelValue.toString());
+        updateDisplayPanelValue(validate(inputValue, commaSign));
         updateDisplayPanelLive();
     }
 
-    private void updateDisplayPanelLive() {
-        displayPanelValueLive.setValue(displayPanelValue.toString());
+    private void resetDisplay() {
+        isDisplayReset = true;
+        updateDisplayPanelValue(defaultDisplayValue);
+        updateDisplayPanelLive();
     }
 
     private ComputedData computeCalculation(char[] math, int nextIndex) {
@@ -97,8 +106,11 @@ public class Calculator extends ViewModel {
                     computedValue = subtract(Double.parseDouble(currentNumber), computedData.value);
                     break;
                 case bracketOpenSign:
+                    hasBracket = true;
                     break;
                 case bracketCloseSign:
+                    hasBracket = false;
+
                     break;
                 default:
                     currentNumber += math[i];
@@ -112,7 +124,31 @@ public class Calculator extends ViewModel {
         return new ComputedData(computedValue, (nextIndex + 1));
     }
 
-    static class ComputedData {
+    private void updateDisplayPanelValue(String value) {
+        displayPanelValue.replace(0, displayPanelValue.length(), value);
+    }
+
+    private void updateDisplayPanelLive() {
+        displayPanelLive.setValue(displayPanelValue.toString());
+    }
+
+    private static double multiply(double firstValue, double secondValue) {
+        return firstValue * secondValue;
+    }
+
+    private static double divide(double firstValue, double secondValue) {
+        return firstValue / secondValue;
+    }
+
+    private static double add(double firstValue, double secondValue) {
+        return firstValue + secondValue;
+    }
+
+    private static double subtract(double firstValue, double secondValue) {
+        return firstValue - secondValue;
+    }
+
+    private class ComputedData {
         double value;
         int    index;
 
@@ -122,31 +158,24 @@ public class Calculator extends ViewModel {
         }
     }
 
-    private double multiply(double firstValue, double secondValue) {
-        return firstValue * secondValue;
-    }
-
-    private double divide(double firstValue, double secondValue) {
-        return firstValue / secondValue;
-    }
-
-    private double add(double firstValue, double secondValue) {
-        return firstValue + secondValue;
-    }
-
-    private double subtract(double firstValue, double secondValue) {
-        return firstValue - secondValue;
-    }
-
-    private void validate(String value) {
-        displayPanelValue.replace(0, displayPanelValue.length(), removeStartingZeroWithDigit(value));
+    private String validate(String value, String commaValue) {
+        return removeZeroDecimal(removeStartingZeroWithDigit(value), commaValue);
     }
 
     private String removeStartingZeroWithDigit(String value) {
-        if (value.length() >= 2 && value.charAt(0) == 0) {
+        if (value.length() >= 2 && value.charAt(0) == '0') {
             value = value.substring(1);
         }
+        return value;
+    }
 
+    private String removeZeroDecimal(String value, String commaValue) {
+        String[] stringArray = value.split(".");
+        if (stringArray.length > 2) {
+            // Throw error:
+        } else if (stringArray.length == 2) {
+            value = stringArray[0] + commaValue + stringArray[1];
+        }
         return value;
     }
 }
