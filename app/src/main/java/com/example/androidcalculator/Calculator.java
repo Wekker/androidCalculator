@@ -50,21 +50,16 @@ public class Calculator extends ViewModel {
 
     void pressEqualOperatorButton() {
         String computedValue = String.valueOf(computeCalculation(displayPanelValue.toString().toCharArray(), 0).value);
-        displayPanelValue.replace(0, displayPanelValue.length(), computedValue);
-        updateDisplayPanelLive();
         isMathComputed = true;
+        updateDisplayPanelValue(computedValue);
+        updateDisplayPanelLive();
     }
 
     private void composeInput(String inputValue) {
-        if (isMathComputed) {
-            displayPanelValue.replace(0, displayPanelValue.length(), inputValue);
-        } else {
-            displayPanelValue.append(inputValue);
-        }
-        isMathComputed = false;
-
         updateDisplayPanelValue(validate(inputValue, commaSign));
         updateDisplayPanelLive();
+        isMathComputed = false;
+        isDisplayReset = false;
     }
 
     private void resetDisplay() {
@@ -125,7 +120,11 @@ public class Calculator extends ViewModel {
     }
 
     private void updateDisplayPanelValue(String value) {
-        displayPanelValue.replace(0, displayPanelValue.length(), value);
+        if (isMathComputed || isDisplayReset) {
+            displayPanelValue.replace(0, displayPanelValue.length(), value);
+        } else {
+            displayPanelValue.append(value);
+        }
     }
 
     private void updateDisplayPanelLive() {
